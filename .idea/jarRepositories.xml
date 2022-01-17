@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="6e029bb4-e420-4ce8-8ad4-be10fceb5ea8" />
+      <option name="name" value="6e029bb4-e420-4ce8-8ad4-be10fceb5ea8" />
+      <option name="url" value="https://maven.aliyun.com/repository/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="73a15bfa-d7fd-48c5-b43e-306f2702eec8" />
+      <option name="name" value="73a15bfa-d7fd-48c5-b43e-306f2702eec8" />
+      <option name="url" value="https://maven.aliyun.com/repository/spring" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="4ba5382c-885a-4e56-80c4-94b1e33e688c" />
+      <option name="name" value="4ba5382c-885a-4e56-80c4-94b1e33e688c" />
+      <option name="url" value="https://maven.aliyun.com/repository/spring-plugin" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="5d8e9ee8-ab56-4c25-922f-6acdf56cfc81" />
+      <option name="name" value="5d8e9ee8-ab56-4c25-922f-6acdf56cfc81" />
+      <option name="url" value="https://maven.aliyun.com/repository/gradle-plugin" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="7de51274-cafd-4474-8254-4efefcce90a8" />
+      <option name="name" value="7de51274-cafd-4474-8254-4efefcce90a8" />
+      <option name="url" value="https://maven.aliyun.com/repository/google" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="9fbd5c81-eeab-4588-8206-571f664e3efe" />
+      <option name="name" value="9fbd5c81-eeab-4588-8206-571f664e3efe" />
+      <option name="url" value="https://maven.aliyun.com/repository/grails-core" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="e70a47d0-5f79-4e0d-bf7f-1bb934750cc5" />
+      <option name="name" value="e70a47d0-5f79-4e0d-bf7f-1bb934750cc5" />
+      <option name="url" value="https://maven.aliyun.com/repository/apache-snapshots" />
+    </remote-repository>
+  </component>
+</project>
