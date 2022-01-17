@@ -23,11 +23,11 @@ public class NoVolatile {
             for (int i = 0; i < 10; i++) {
                 nv.add(new Object());
                 System.out.println(Thread.currentThread().getName() + "--------------" + nv.size());
-                /* try {
+                 try {
                     Thread.sleep(100L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }*/
+                }
             }
         },"t1").start();
 
