@@ -20,17 +20,19 @@ public class NoVolatile {
         NoVolatile nv = new NoVolatile();
 
         new Thread(()->{
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 10; i++) {
                 nv.add(new Object());
             }
             System.out.println(Thread.currentThread().getName()+"--------------"+nv.size());
         },"t1").start();
 
         new Thread(()->{
-            for (int i = 0; i < 10000; i++) {
-                nv.add(new Object());
+            while (true){
+                if (nv.size()==5){
+                    System.out.println(Thread.currentThread().getName()+"--------------"+nv.size());
+                    break;
+                }
             }
-            System.out.println(Thread.currentThread().getName()+"--------------"+nv.size());
         },"t2").start();
     }
 }
