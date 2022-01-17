@@ -5,7 +5,7 @@ import java.util.List;
 
 public class NoVolatile {
 
-    private List<Object> list = new ArrayList<>();
+    private volatile List<Object> list = new ArrayList<>();
 
     public void add(Object o){
         this.list.add(o);
@@ -22,8 +22,13 @@ public class NoVolatile {
         new Thread(()->{
             for (int i = 0; i < 10; i++) {
                 nv.add(new Object());
+                System.out.println(Thread.currentThread().getName() + "--------------" + nv.size());
+                /* try {
+                    Thread.sleep(100L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
             }
-            System.out.println(Thread.currentThread().getName()+"--------------"+nv.size());
         },"t1").start();
 
         new Thread(()->{
