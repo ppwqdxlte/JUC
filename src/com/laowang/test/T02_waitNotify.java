@@ -1,12 +1,11 @@
-package com.laowang.concurrencyWithNoVolatile;
+package com.laowang.test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class T02_waitNotify {
 
-    private List<Object> list = new ArrayList<>();
+    private final List<Object> list = new ArrayList<>();
 
     public void add(Object o){
         list.add(o);
@@ -21,7 +20,7 @@ public class T02_waitNotify {
         T02_waitNotify test = new T02_waitNotify();
 
         Object lock = new Object();
-
+        //观察者线程
         new Thread(()->{
             //尝试lock
             synchronized (lock){
@@ -43,7 +42,7 @@ public class T02_waitNotify {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        //执行者线程
         new Thread(()->{
             synchronized (lock){
                 System.out.println("t2启动");

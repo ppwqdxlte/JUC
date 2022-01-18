@@ -1,4 +1,4 @@
-package com.laowang.concurrencyWithNoVolatile;
+package com.laowang.test;
 
 import java.util.ArrayList;
 import java.util.List;
