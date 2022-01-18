@@ -3,7 +3,7 @@ package com.laowang.concurrencyWithNoVolatile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoVolatile {
+public class T01_NoVolatile {
 
     private volatile List<Object> list = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class NoVolatile {
 
     public static void main(String[] args) {
 
-        NoVolatile nv = new NoVolatile();
+        T01_NoVolatile nv = new T01_NoVolatile();
 
         new Thread(()->{
             for (int i = 0; i < 10; i++) {
