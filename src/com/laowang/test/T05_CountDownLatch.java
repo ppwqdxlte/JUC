@@ -23,11 +23,12 @@ public class T05_CountDownLatch {
         new Thread(()->{
             System.out.println("t1开始运行");
             try {
-                latch.await();
+                latch.await();//给当前线程上门闩
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println("t1结束");
+            latch.countDown();//帮t2开门闩
         },"t1").start();
 
         try {
@@ -37,18 +38,27 @@ public class T05_CountDownLatch {
         }
 
         new Thread(()->{
-            System.out.println("t2开始运行");
-
-            for (int i = 0; i < 10; i++) {
-                test.add(new Object());
-                System.out.println("add "+ i);
+            synchronized (latch){
+                System.out.println("t2开始运行");
+                for (int i = 0; i < 10; i++) {
+                    test.add(new Object());
+                    System.out.println("add "+ i);
+                /*
+                若是不让t2每次歇一会儿，t1就不会在5后紧跟着打印，而是6甚至以后，t1反应不过来，那么怎么能准确呢？
+                bingo!!!::用两个门闩！！先闩t1，到点儿后，再闩t2，然后在t2线程内，上门闩锁住t2，就能正确顺序运行了！
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                if (test.size() == 5){
-                    latch.countDown();//扔给其它线程一个钥匙，此时钥匙盒没了钥匙了，t2线程自己也没钥匙就暂时阻塞住了，等t1用完钥匙，t2才会重新获得钥匙
+                }*/
+                    if (test.size() == 5){
+                        latch.countDown();//再给t1开门栓
+                        try {
+                            latch.await();//先给自己上门闩
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
             System.out.println("t2结束");
