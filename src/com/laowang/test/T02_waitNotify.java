@@ -3,6 +3,9 @@ package com.laowang.test;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* 对于wait() notify() ，应该在synchronized代码块中，因为只有拿到锁了，才能执行这两个方法，否则报错
+* */
 public class T02_waitNotify {
 
     private final List<Object> list = new ArrayList<>();
@@ -36,12 +39,7 @@ public class T02_waitNotify {
                 System.out.println("t1结束了");
             }
         },"t1").start();
-        //主线程睡一秒再启动 t2
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         //执行者线程
         new Thread(()->{
             synchronized (lock){
@@ -49,11 +47,6 @@ public class T02_waitNotify {
                 for (int i = 0; i < 10; i++) {
                     test.add(new Object());
                     System.out.println("add " + i);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     if (test.size() == 5){
                         lock.notify();//光通知没用，锁还没被释放
                         try {

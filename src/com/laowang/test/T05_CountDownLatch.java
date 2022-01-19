@@ -22,47 +22,38 @@ public class T05_CountDownLatch {
 
         new Thread(()->{
             System.out.println("t1开始运行");
-            try {
-                latch.await();//给当前线程上门闩
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (test.size() != 5){
+                try {
+                    latch.await();//给当前线程上门闩
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             System.out.println("t1结束");
             latch.countDown();//帮t2开门闩
         },"t1").start();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         new Thread(()->{
-            synchronized (latch){
                 System.out.println("t2开始运行");
                 for (int i = 0; i < 10; i++) {
-                    test.add(new Object());
-                    System.out.println("add "+ i);
-                /*
-                若是不让t2每次歇一会儿，t1就不会在5后紧跟着打印，而是6甚至以后，t1反应不过来，那么怎么能准确呢？
-                bingo!!!::用两个门闩！！先闩t1，到点儿后，再闩t2，然后在t2线程内，上门闩锁住t2，就能正确顺序运行了！
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-                    if (test.size() == 5){
+                    if (test.size() == 5) {
                         latch.countDown();//再给t1开门栓
                         try {
                             latch.await();//先给自己上门闩
+                            test.add(new Object());     //解除阻塞，马上添加第6个元素【add 5】
+                            System.out.println("add " + i);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
+                            e.printStackTrace();
                         }
+                    }else {     // add 0,1,2,3,4,(i==5已然跳过),6,7,8,9
+                        //【注意】！！！如果没有else分支，可能发生指令重排序！add 5会提前打印
+                        //也就是说，并发处理的分支，一定要跟正常逻辑分开！！否则顺序会出问题
+                        test.add(new Object());
+                        System.out.println("add " + i);
                     }
                 }
-            }
-            System.out.println("t2结束");
+                System.out.println("t2结束");
         },"t2").start();
-
     }
 }
