@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-public class T05_CountDownLatch {
+public class T03_CountDownLatch {
 
     private List<Object> list = new ArrayList<>();
 
@@ -16,7 +16,7 @@ public class T05_CountDownLatch {
     }
 
     public static void main(String[] args) {
-        T05_CountDownLatch test = new T05_CountDownLatch();
+        T03_CountDownLatch test = new T03_CountDownLatch();
 
         CountDownLatch latch = new CountDownLatch(1);//门闩类，形参相当于钥匙盒，许可池，被门闩控制的线程需要拿到许可才能运行，许可拿走一个，盒子就少一个，正所谓count down
 
