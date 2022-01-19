@@ -2,7 +2,6 @@ package com.laowang.test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
 
 public class T04_LockSupport {
