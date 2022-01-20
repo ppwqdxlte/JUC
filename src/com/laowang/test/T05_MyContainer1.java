@@ -5,6 +5,8 @@ import java.util.concurrent.TimeoutException;
 
 /*
 * 【题目】写一个容器，生产者消费者模式，用wait()或notify()或notifyAll()实现 2个生产者和若干个消费者
+* 供过于求或者供不应求，都能正常输出并结束，说明synchronized配合wait()和notify()/notifyAll() 方式比较稳定，
+* 而其它的新的JUC 同步类就没那么好用了，也许能实现，也许学习成本比较高吧！！
 * */
 public class T05_MyContainer1<T> {
 
@@ -57,7 +59,7 @@ public class T05_MyContainer1<T> {
 
         for (int i = 0; i < 2; i++) {
             new Thread(()->{
-                for (int j = 0; j < 25; j++) {
+                for (int j = 0; j < 10; j++) {
                     try {
                         container1.add(new Object());
                     } catch (TimeoutException e) {

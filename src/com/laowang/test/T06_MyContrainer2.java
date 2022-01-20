@@ -18,7 +18,7 @@ public class T06_MyContrainer2<T> {
         try {
             lock.lock();//上锁
             while (list.size() == MAX){
-                producer.await();//生产者阻塞
+                producer.await(3,TimeUnit.SECONDS);//生产者阻塞
             }
             list.add(t);
             System.out.println(Thread.currentThread().getName()+" 生成一个，共有商品 "+ list.size());
